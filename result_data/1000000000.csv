@@ -1,3 +1,4 @@
+'id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id','server_name','sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank','test_grade','test_rating', 'path'
 1000000000,353,168,496,1287734032,1250,MN,949,DELETE ME,Ookla,None,multi,MagicNet,4.5,4,F-,1,result/1000000000
 1000000001,457,106,97,1287734032,300,IN,798,Mumbai,Honesty Net Solutions,None,multi,Tata Indicom,2.0,8,F,1,result/1000000001
 1000000002,4426,642,84,1287734032,0,US,1278,"Honolulu, HI",AlohaTone.com,None,multi,Hawaiian Telcom,2.5,17,F+,1,result/1000000002
