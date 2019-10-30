@@ -1,0 +1,10 @@
+Install python from https://www.python.org/downloads/
+
+Open win + R and type cmd
+
+Then copy these statement and paste it. 
+
+pip install lxml
+pip install fake_useragent
+pip install html5lib
+pip install bs4
