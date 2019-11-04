@@ -6,6 +6,7 @@ A python web crawler that fetches nearly 10 billion pages of https://www.speedte
 `pip install fake_useragent`
 `pip install html5lib`
 `pip install bs4`
+`pip install requests`
 
 ##### main.py
 ```python
