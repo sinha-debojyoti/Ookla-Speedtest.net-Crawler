@@ -17,3 +17,5 @@ steps = 10 #Number of result at a time
 
 web_crawler.crawler(ID, steps)
 ```
+# Installation
+https://join.slack.com/t/ooklawebcrawler/shared_invite/enQtODQzMDg5MDEwNDE5LTdlZGNiMzg1MDljMDYwMjkyMWFhOTRmYWExNGZjMGI0NWU2MDc4NmU5N2YyY2IyMDk3OTdjYTk5ZWI0ZDU2MGE
