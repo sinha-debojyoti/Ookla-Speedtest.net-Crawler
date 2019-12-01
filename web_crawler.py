@@ -8,7 +8,7 @@ from fake_useragent import UserAgent
 
 
 def fetch_data(result_id):
-    url = "https://www.speedtest.net/result/" + str(result_id)
+    url = f"https://www.speedtest.net/result/{result_id}"
 
     ua = UserAgent()
     header = {'User-Agent': str(ua.chrome)}
@@ -57,17 +57,25 @@ def fetch_data(result_id):
 # steps = 500
 
 def crawler(ID, steps):
+
+    fields = ['id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id',
+              'server_name',
+              'sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank',
+              'test_grade',
+              'test_rating', 'path']
+
+    file_name = f'result_data/{ID}.csv'
+    with open(file_name,'w',encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file,lineterminator='\n')
+        writer.writerow(fields)
+    csv_file.close()
+
+
     for i in range(steps):
         data = fetch_data(ID + i)
 
         if data:
             print("Result ID " + str(ID + i) + " Data fetched,", end=" ")
-
-            fields = ['id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id',
-                      'server_name',
-                      'sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank',
-                      'test_grade',
-                      'test_rating', 'path']
 
             for k in fields:
                 if k not in data.keys():
@@ -75,8 +83,7 @@ def crawler(ID, steps):
 
             # print(data)
 
-            file = 'result_data/' + str(ID) + '.csv'
-            with open(file, 'a', encoding='utf-8') as csv_file:
+            with open(file_name, 'a', encoding='utf-8') as csv_file:
                 writer = csv.writer(csv_file, lineterminator='\n')
 
                 temp_data = []
