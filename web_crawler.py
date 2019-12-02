@@ -1,15 +1,21 @@
 import csv
 import json
 import time
+import multiprocessing as mp
 
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
 
-def fetch_data(result_id):
+def fetch_data(result_id,ID = 1000000000):
     url = f"https://www.speedtest.net/result/{result_id}"
-
+    file_name = f'result_data/{ID}.csv'
+    fields = ['id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id',
+              'server_name',
+              'sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank',
+              'test_grade',
+              'test_rating', 'path']
     ua = UserAgent()
     header = {'User-Agent': str(ua.chrome)}
 
@@ -46,43 +52,12 @@ def fetch_data(result_id):
         data = json.loads(final_data)
 
         del url, url_data, soup, script_data, script_data_to_text, init_data, final_data, start, end
-
-        return data
-    else:
-        print("404 Error Code")
-        return
-
-
-# ID = 1000000000
-# steps = 500
-
-def crawler(ID, steps):
-
-    fields = ['id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id',
-              'server_name',
-              'sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank',
-              'test_grade',
-              'test_rating', 'path']
-
-    file_name = f'result_data/{ID}.csv'
-    with open(file_name,'w',encoding='utf-8') as csv_file:
-        writer = csv.writer(csv_file,lineterminator='\n')
-        writer.writerow(fields)
-    csv_file.close()
-
-
-    for i in range(steps):
-        data = fetch_data(ID + i)
-
-        if data:
-            print("Result ID " + str(ID + i) + " Data fetched,", end=" ")
-
+    #This part stores the Data in the CSV file
+    if data:
+            print("Result ID " +str(result_id)+ " Data fetched")
             for k in fields:
                 if k not in data.keys():
                     data[k] = 'NA'
-
-            # print(data)
-
             with open(file_name, 'a', encoding='utf-8') as csv_file:
                 writer = csv.writer(csv_file, lineterminator='\n')
 
@@ -94,5 +69,24 @@ def crawler(ID, steps):
             csv_file.close()
 
             print("Data stored")
-        else:
-            print("404 Error Code")
+    else:
+        print("404 Error Code for ID "+str(result_id))
+        return
+
+def crawler(ID, steps = 500):
+    fields = ['id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id',
+              'server_name',
+              'sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank',
+              'test_grade',
+              'test_rating', 'path']
+
+    file_name = f'result_data/{ID}.csv'
+    with open(file_name,'w',encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file,lineterminator='\n')
+        writer.writerow(fields)
+    csv_file.close()
+    #Pooling the URL's
+    pool = mp.Pool(mp.cpu_count())
+    pool.map_async(fetch_data,[ID+i for i in range(steps)],chunksize = steps//mp.cpu_count())
+    pool.close()
+    pool.join()
