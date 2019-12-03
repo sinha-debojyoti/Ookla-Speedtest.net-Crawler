@@ -10,6 +10,8 @@ A python web crawler that fetches nearly 10 billion pages of https://www.speedte
 `pip install html5lib`
 `pip install bs4`
 `pip install requests`
+`pip install multiprocessing`
+`pip install mysql-connector-python`
 
 ##### main.py
 ```python
