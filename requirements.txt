@@ -6,6 +6,7 @@ fake-useragent==0.1.11
 html5lib==1.0.1
 idna==2.8
 lxml==4.4.2
+mysql-connector==2.2.9
 requests==2.22.0
 six==1.13.0
 soupsieve==1.9.5

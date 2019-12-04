@@ -1,3 +1,5 @@
+#PEP 8 compliancy
+
 import csv
 import json
 import time
@@ -5,7 +7,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
-
+from database import Database
 
 def fetch_data(result_id):
     url = f"https://www.speedtest.net/result/{result_id}"
@@ -52,47 +54,19 @@ def fetch_data(result_id):
         print("404 Error Code")
         return
 
-
-# ID = 1000000000
-# steps = 500
-
-def crawler(ID, steps):
-
-    fields = ['id', 'download', 'upload', 'latency', 'date', 'distance', 'country_code', 'server_id',
-              'server_name',
-              'sponsor_name', 'sponsor_url', 'connection_mode', 'isp_name', 'isp_rating', 'test_rank',
-              'test_grade',
-              'test_rating', 'path']
-
-    file_name = f'result_data/{ID}.csv'
-    with open(file_name,'w',encoding='utf-8') as csv_file:
-        writer = csv.writer(csv_file,lineterminator='\n')
-        writer.writerow(fields)
-    csv_file.close()
+def process_data():
+    pass
 
 
-    for i in range(steps):
-        data = fetch_data(ID + i)
+def crawler(ID=1000000000, steps=2):
 
-        if data:
-            print("Result ID " + str(ID + i) + " Data fetched,", end=" ")
+    fields = {'id':'int(11)','download':'int(5)','upload':'int(5)','latency':'int(5)',
+              'date':'int(11)','distance':'int(5)','country_code':'varchar(3)',
+              'server_id':'int(5)','server_name':'varchar(25)','sponsor_name':'varchar(30)'
+              ,'sponsor_url':'varchar(6)','connection_mode':'varchar(10)','isp_name':'varchar(25)'
+              ,'isp_rating':'float','test_rank':'int(5)','test_grade':'varchar(5)','path':'varchar(30)'}
+ 
+    connection = Database(table_name='crawler',fields=fields)
 
-            for k in fields:
-                if k not in data.keys():
-                    data[k] = 'NA'
-
-            # print(data)
-
-            with open(file_name, 'a', encoding='utf-8') as csv_file:
-                writer = csv.writer(csv_file, lineterminator='\n')
-
-                temp_data = []
-                for value in data:
-                    temp_data.append(str(data[value]))
-
-                writer.writerow(temp_data)
-            csv_file.close()
-
-            print("Data stored")
-        else:
-            print("404 Error Code")
+if __name__ == '__main__':
+    crawler()
