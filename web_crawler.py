@@ -60,15 +60,18 @@ def process_data():
 
 def crawler(ID=1000000000, steps=2):
 
-    fields = {'id':'int(11)','download':'int(5)','upload':'int(5)','latency':'int(5)',
-              'date':'int(11)','distance':'int(5)','country_code':'varchar(3)',
-              'server_id':'int(5)','server_name':'varchar(25)','sponsor_name':'varchar(30)'
-              ,'sponsor_url':'varchar(6)','connection_mode':'varchar(10)','isp_name':'varchar(25)'
-              ,'isp_rating':'float','test_rank':'int(5)','test_grade':'varchar(5)','test_rating':'float','path':'varchar(30)'}
+    fields = {'id':'int(11)','download':'int(5)','upload':'int(5)',
+              'latency':'int(5)','date':'int(11)','distance':'int(5)',
+              'country_code':'varchar(3)','server_id':'int(5)',
+              'server_name':'varchar(25)','sponsor_name':'varchar(30)'
+              ,'sponsor_url':'varchar(6)','connection_mode':'varchar(10)',
+              'isp_name':'varchar(25)','isp_rating':'float','test_rank':'int(5)',
+              'test_grade':'varchar(5)','test_rating':'float','path':'varchar(30)'}
  
-    connection = Database(table_name='crawler')
-    data = fetch_data(1000000000)
-    connection.insert(data)
+    connection = Database(table_name='crawler',fields=fields)
+    for i in range(steps):
+        data = fetch_data(ID + i)
+        connection.insert(data)
 
 if __name__ == '__main__':
     crawler()
