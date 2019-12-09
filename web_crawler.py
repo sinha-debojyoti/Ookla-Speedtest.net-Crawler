@@ -1,4 +1,3 @@
-import csv
 import json
 import time
 
@@ -47,16 +46,10 @@ def fetch_data(result_id):
         data = json.loads(final_data)
 
         del url, url_data, soup, script_data, script_data_to_text, init_data, final_data, start, end
+       
         data['isp_rating'] = float(data['isp_rating'])
         data['id'] = int(data['id']) 
         return data
-    else:
-        print("404 Error Code")
-        return
-
-def process_data():
-    pass
-
 
 def crawler(ID=1000000000, steps=2):
 
@@ -72,6 +65,3 @@ def crawler(ID=1000000000, steps=2):
     for i in range(steps):
         data = fetch_data(ID + i)
         connection.insert(data)
-
-if __name__ == '__main__':
-    crawler()

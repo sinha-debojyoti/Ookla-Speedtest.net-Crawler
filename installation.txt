@@ -1,4 +1,5 @@
 Install python from https://www.python.org/downloads/
+Install mysql from https://dev.mysql.com/downloads/installer/
 
 Open win + R and type cmd
 
@@ -8,3 +9,5 @@ pip install lxml
 pip install fake_useragent
 pip install html5lib
 pip install bs4
+pip install multiprocessing
+pip install mysql-connector-python
