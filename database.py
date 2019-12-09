@@ -30,8 +30,9 @@ class Database:
             if output is None:
                 fields_list = [f'{x} {fields[x]}' for x in fields.keys()]            
                 self.cursor.execute(f"CREATE TABLE {self.table_name}({','.join(fields_list)})")
-            else:
-                raise Exception(f'{table_name} already exists')
+                print('Table successfully created')
+                self.conn.commit()
+            
 
     def insert(self,data):
         """
