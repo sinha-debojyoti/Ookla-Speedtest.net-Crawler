@@ -1,5 +1,3 @@
-#PEP 8 compliancy
-
 import csv
 import json
 import time
@@ -7,6 +5,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
+
 from database import Database
 
 def fetch_data(result_id):

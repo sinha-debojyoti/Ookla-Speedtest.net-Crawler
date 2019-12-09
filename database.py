@@ -1,5 +1,6 @@
-from mysql.connector import MySQLConnection,Error
 from configparser import ConfigParser
+
+from mysql.connector import MySQLConnection,Error
 
 class Database:
     
@@ -7,7 +8,7 @@ class Database:
         """
         Initialize the connection with the database and make the required table.
         :param table_name: name of the table to be inserted
-        :param fields: list of fields to be inserted in the table table_name
+        :param fields: a dictionary of field_name and their_type to be inserted in the table table_name
         :optional param filename: name of the configuration file
         :optional param section: section of database configuration
         """
@@ -29,18 +30,19 @@ class Database:
             if output is None:
                 fields_list = [f'{x} {fields[x]}' for x in fields.keys()]            
                 self.cursor.execute(f"CREATE TABLE {self.table_name}({','.join(fields_list)})")
-                
+            else:
+                raise Exception(f'{table_name} already exists')
 
     def insert(self,data):
         """
         This function is used to insert data into the table.
-        :param data: dictonary contain the pair wise data
+        :param data: dictonary contain the pair wise data {field_name:value}
         """
-        
+       
         values = [data[x] for x in data.keys()]
-        values[0] = int(values[0])
-        values[-5] = float(values[-5])
-        self.cursor.execute(f"INSERT INTO TABLE {self.table_name} values({','.join(str(x) for x in values)})")
+        s = ('%s,'*len(data))[:-1]
+        insert_statement = f"INSERT INTO {self.table_name} values({s})"
+        self.cursor.execute(insert_statement,values) 
         self.conn.commit()  
 
     def read_db_config(self,filename,section):
@@ -67,4 +69,4 @@ class Database:
     def __del__(self):
         self.cursor.close()
         self.conn.close()
-        print('Connection closed')
+        print('Connection closed.GoodBye!')
