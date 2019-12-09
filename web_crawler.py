@@ -47,7 +47,8 @@ def fetch_data(result_id):
         data = json.loads(final_data)
 
         del url, url_data, soup, script_data, script_data_to_text, init_data, final_data, start, end
-
+        data['isp_rating'] = float(data['isp_rating'])
+        data['id'] = int(data['id']) 
         return data
     else:
         print("404 Error Code")
@@ -63,9 +64,11 @@ def crawler(ID=1000000000, steps=2):
               'date':'int(11)','distance':'int(5)','country_code':'varchar(3)',
               'server_id':'int(5)','server_name':'varchar(25)','sponsor_name':'varchar(30)'
               ,'sponsor_url':'varchar(6)','connection_mode':'varchar(10)','isp_name':'varchar(25)'
-              ,'isp_rating':'float','test_rank':'int(5)','test_grade':'varchar(5)','path':'varchar(30)'}
+              ,'isp_rating':'float','test_rank':'int(5)','test_grade':'varchar(5)','test_rating':'float','path':'varchar(30)'}
  
-    connection = Database(table_name='crawler',fields=fields)
+    connection = Database(table_name='crawler')
+    data = fetch_data(1000000000)
+    connection.insert(data)
 
 if __name__ == '__main__':
     crawler()
