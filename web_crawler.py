@@ -46,9 +46,12 @@ def fetch_data(result_id):
         data = json.loads(final_data)
 
         del url, url_data, soup, script_data, script_data_to_text, init_data, final_data, start, end
-       
+
+        TOTAL_BIT=1024 # For Converting SPeed into MB.
         data['isp_rating'] = float(data['isp_rating'])
-        data['id'] = int(data['id']) 
+        data['id'] = int(data['id'])
+        data['download']=round(data['download']/TOTAL_BIT+0.01,2)
+        data['upload']=round(data['upload']/TOTAL_BIT+0.01,2)
         return data
 
 def crawler(ID=1000000000, steps=2):
