@@ -70,4 +70,3 @@ class Database:
     def __del__(self):
         self.cursor.close()
         self.conn.close()
-        print('Connection closed.GoodBye!')

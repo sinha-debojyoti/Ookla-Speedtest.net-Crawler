@@ -1,5 +1,6 @@
 import json
 import time
+import multiprocessing as mp
 
 import requests
 from bs4 import BeautifulSoup
@@ -52,11 +53,8 @@ def fetch_data(result_id):
         data['id'] = int(data['id'])
         data['download']=round(data['download']/TOTAL_BIT+0.01,2)
         data['upload']=round(data['upload']/TOTAL_BIT+0.01,2)
-        return data
 
-def crawler(ID=1000000000, steps=2):
-
-    fields = {'id':'int(11)','download':'int(5)','upload':'int(5)',
+        fields = {'id':'int(11)','download':'int(5)','upload':'int(5)',
               'latency':'int(5)','date':'int(11)','distance':'int(5)',
               'country_code':'varchar(3)','server_id':'int(5)',
               'server_name':'varchar(25)','sponsor_name':'varchar(30)'
@@ -64,7 +62,12 @@ def crawler(ID=1000000000, steps=2):
               'isp_name':'varchar(25)','isp_rating':'float','test_rank':'int(5)',
               'test_grade':'varchar(5)','test_rating':'float','path':'varchar(30)'}
  
-    connection = Database(table_name='crawler',fields=fields)
-    for i in range(steps):
-        data = fetch_data(ID + i)
+
+        connection = Database(table_name='crawler',fields=fields)
         connection.insert(data)
+        
+def crawler(ID=1000000000, steps=2):
+    pool = mp.Pool(mp.cpu_count()) 
+    pool.imap_unordered(fetch_data,[ID+i for i in range(steps)])
+    pool.close()
+    pool.join()
