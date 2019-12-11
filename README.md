@@ -46,7 +46,7 @@ mysql-connector-python : Enable python programs to access MySQL database
 ```
 
 ## Contributing
-follow all [Contributing.md](Contributing.md) rules.
+follow all [CONTRIBUTING.md](Contributing.md) rules.
 
 
 
