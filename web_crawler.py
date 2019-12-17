@@ -54,7 +54,7 @@ def fetch_data(result_id):
         data['download']=round(data['download']/TOTAL_BIT+0.01,2)
         data['upload']=round(data['upload']/TOTAL_BIT+0.01,2)
 
-        fields = {'id':'int(11)','download':'int(5)','upload':'int(5)',
+        fields = {'id':'int(11)','download':'decimal(18,2)','upload':'decimal(18,2)',
               'latency':'int(5)','date':'int(11)','distance':'int(5)',
               'country_code':'varchar(3)','server_id':'int(5)',
               'server_name':'varchar(25)','sponsor_name':'varchar(30)'
