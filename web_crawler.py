@@ -1,14 +1,23 @@
+from fake_useragent import UserAgent
+from bs4 import BeautifulSoup
+from database import Database
+import multiprocessing as mp
+import requests
 import json
 import time
-import multiprocessing as mp
-
-import requests
-from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
-
-from database import Database
 
 def fetch_data(result_id):
+    """Fetch scrap content and save result into database.
+
+    Input
+    -----
+        result_id : Must be in integer format
+
+    Output
+    ------
+        None
+
+    """
     url = f"https://www.speedtest.net/result/{result_id}"
 
     ua = UserAgent()
@@ -65,8 +74,16 @@ def fetch_data(result_id):
 
         connection = Database(table_name='crawler',fields=fields)
         connection.insert(data)
+
         
 def crawler(ID=1000000000, steps=2):
+    """Manage Multiprocessing.
+
+    Input
+    -----
+        ID    : Must be in integer format,Default value is 1000000000
+        steps : default value is 2.
+    """
     pool = mp.Pool(mp.cpu_count()) 
     pool.imap_unordered(fetch_data,[ID+i for i in range(steps)])
     pool.close()
