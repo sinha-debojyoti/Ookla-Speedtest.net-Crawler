@@ -1,8 +1,27 @@
+from mysql.connector import MySQLConnection,Error
 from configparser import ConfigParser
 
-from mysql.connector import MySQLConnection,Error
 
 class Database:
+    """Database Related Operation
+
+    Methods
+    --------
+        1.insert(data)
+        2.read_db_config(filename,section)
+
+    Objcet Creation
+    --------------
+        db=Database(table_name='crawler',fields=fields)
+
+        Parameters:
+        ----------
+            table_name : name of table
+            fields     : dictionary of field_name and their_type
+            filename   : configuration filename
+            section    : database section
+    
+    """
     
     def __init__(self,table_name=None,fields=None,filename='config.ini',section='mysql'):
         """
