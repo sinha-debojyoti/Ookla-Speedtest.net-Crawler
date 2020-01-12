@@ -1,5 +1,5 @@
 # Ookla Speedtest.net Crawler
-[Join Communication Chanel for Help and Discussion](https://join.slack.com/t/ooklawebcrawler/shared_invite/enQtODQzMDg5MDEwNDE5LTdlZGNiMzg1MDljMDYwMjkyMWFhOTRmYWExNGZjMGI0NWU2MDc4NmU5N2YyY2IyMDk3OTdjYTk5ZWI0ZDU2MGE)
+[Join Communication Chanel for Help and Discussion](https://join.slack.com/t/ooklawebcrawler/shared_invite/enQtOTAyNDMyMTQ4NDY4LWExM2IyZmViODhmMjgwY2U3OGRiYzYyNWM0NjJkM2QyMDRiMzM0NDI5NmM1Y2NkZTBkN2QxNmM2ZjYyMGQ4ZjQ)
 
 ## About
 ### Ookla Speedtest.net Crawler
