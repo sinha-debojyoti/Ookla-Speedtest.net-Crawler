@@ -4,7 +4,7 @@ certifi==2019.11.28
 chardet==3.0.4
 fake-useragent==0.1.11
 html5lib==1.0.1
-idna==2.8
+idna==2.9
 lxml==4.5.0
 mysql-connector==2.2.9
 requests==2.22.0
