@@ -8,7 +8,7 @@ idna==2.8
 lxml==4.5.0
 mysql-connector==2.2.9
 requests==2.22.0
-six==1.14.0
+six==1.15.0
 soupsieve==1.9.5
 urllib3==1.25.8
 webencodings==0.5.1
