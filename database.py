@@ -8,11 +8,11 @@ class Database:
     Methods
     --------
         1.insert(data)
-        2.read_db_config(filename,section)
+        2.read_db_config(filename, section)
 
     Objcet Creation
     --------------
-        db=Database(table_name='crawler',fields=fields)
+        db=Database(table_name='crawler', fields=fields)
 
         Parameters:
         ----------
@@ -20,10 +20,10 @@ class Database:
             fields     : dictionary of field_name and their_type
             filename   : configuration filename
             section    : database section
-    
+
     """
-    
-    def __init__(self,table_name=None,fields=None,filename='config.ini',section='mysql'):
+
+    def __init__(self, table_name=None, fields=None, filename='config.ini', section='mysql'):
         """
         Initialize the connection with the database and make the required table.
         :param table_name: name of the table to be inserted
@@ -31,9 +31,9 @@ class Database:
         :optional param filename: name of the configuration file
         :optional param section: section of database configuration
         """
-        self.table_name = table_name 
-        db_config = self.read_db_config(filename,section)
-         
+        self.table_name = table_name
+        db_config = self.read_db_config(filename, section)
+
         try :
             self.conn = MySQLConnection(**db_config)
         except Error as error:
@@ -41,29 +41,29 @@ class Database:
             return
 
         self.cursor = self.conn.cursor()
-        
+
         if table_name is not None and fields is not None:
-            self.cursor.execute(f"show tables like '{self.table_name}'") 
+            self.cursor.execute(f"show tables like '{self.table_name}'")
             output = self.cursor.fetchone()
             #if no such table exits create one
             if output is None:
-                fields_list = [f'{x} {fields[x]}' for x in fields.keys()]            
+                fields_list = (f'{k} {v}' for k, v in fields.items())
                 self.cursor.execute(f"CREATE TABLE {self.table_name}({','.join(fields_list)})")
                 print('Table successfully created')
                 self.conn.commit()
-            
 
-    def insert(self,data):
+
+    def insert(self, data):
         """
         This function is used to insert data into the table.
         :param data: dictonary contain the pair wise data {field_name:value}
         """
-       
-        values = [data[x] for x in data.keys()]
-        s = ('%s,'*len(data))[:-1]
+
+        values = [v for v in data.values()]
+        s = ','.join('%s' for _ in data)
         insert_statement = f"INSERT INTO {self.table_name} values({s})"
-        self.cursor.execute(insert_statement,values) 
-        self.conn.commit()  
+        self.cursor.execute(insert_statement, values)
+        self.conn.commit()
 
     def read_db_config(self,filename,section):
         """
