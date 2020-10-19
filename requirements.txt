@@ -12,5 +12,5 @@ six==1.15.0
 soupsieve==1.9.5
 urllib3==1.25.10
 webencodings==0.5.1
-mysql-connector-python==8.0.21
+mysql-connector-python==8.0.22
 multiprocessing==2.6.2.1
