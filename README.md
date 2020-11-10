@@ -1,3 +1,5 @@
+[![HitCount](http://hits.dwyl.com/sinha-debojyoti/Ookla-Speedtestnet-Crawler.svg)](http://hits.dwyl.com/sinha-debojyoti/Ookla-Speedtestnet-Crawler)
+
 # Ookla Speedtest.net Crawler
 [Join Communication Chanel for Help and Discussion](https://join.slack.com/t/ooklawebcrawler/shared_invite/enQtOTAyNDMyMTQ4NDY4LWExM2IyZmViODhmMjgwY2U3OGRiYzYyNWM0NjJkM2QyMDRiMzM0NDI5NmM1Y2NkZTBkN2QxNmM2ZjYyMGQ4ZjQ)
 
