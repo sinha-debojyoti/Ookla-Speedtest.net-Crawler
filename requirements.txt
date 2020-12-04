@@ -5,7 +5,7 @@ chardet==3.0.4
 fake-useragent==0.1.11
 html5lib==1.1
 idna==2.10
-lxml==4.6.1
+lxml==4.6.2
 mysql-connector==2.2.9
 requests==2.25.0
 six==1.15.0
