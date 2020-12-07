@@ -6,6 +6,10 @@ import requests
 import json
 import time
 
+
+ray.init()
+
+@ray.remote
 def fetch_data(result_id):
     """Fetch scrap content and save result into database.
 
@@ -70,12 +74,13 @@ def fetch_data(result_id):
               ,'sponsor_url':'varchar(6)','connection_mode':'varchar(10)',
               'isp_name':'varchar(25)','isp_rating':'float','test_rank':'int(5)',
               'test_grade':'varchar(5)','test_rating':'float','path':'varchar(30)'}
- 
+
 
         connection = Database(table_name='crawler',fields=fields)
         connection.insert(data)
 
-        
+
+@ray.remote
 def crawler(ID=1000000000, steps=2):
     """Manage Multiprocessing.
 
@@ -84,7 +89,4 @@ def crawler(ID=1000000000, steps=2):
         ID    : Must be in integer format,Default value is 1000000000
         steps : default value is 2.
     """
-    pool = mp.Pool(mp.cpu_count()) 
-    pool.imap_unordered(fetch_data,[ID+i for i in range(steps)])
-    pool.close()
-    pool.join()
+    fetch_data.remote(ID+i for i in range(steps))
