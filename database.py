@@ -59,13 +59,14 @@ class Database:
         :param data: dictonary contain the pair wise data {field_name:value}
         """
 
-        values = [v for v in data.values()]
+        values = list(data.values())
         s = ','.join('%s' for _ in data)
         insert_statement = f"INSERT INTO {self.table_name} values({s})"
         self.cursor.execute(insert_statement, values)
         self.conn.commit()
 
-    def read_db_config(self,filename,section):
+    @staticmethod
+    def read_db_config(filename,section):
         """
         Read database configuration from the file and return dictionary object
         :param filename: name of the configuration file
