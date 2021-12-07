@@ -1,10 +1,10 @@
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from database import Database
-import multiprocessing as mp
 import requests
 import json
 import time
+import ray
 
 
 ray.init()
