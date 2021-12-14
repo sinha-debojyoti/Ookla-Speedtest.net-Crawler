@@ -12,8 +12,8 @@ Download or clone the repository and set up a virtual environment.
 ```
 git clone https://github.com/sinha-debojyoti/Ookla-Speedtest.net-Crawler
 cd Ookla-Speedtest.net-Crawler
-python3 -m venv venv 
-source venv/bin/activate
+python -m venv env 
+env\Scripts\activate.bat
 ```
 Installing required packages
 ```
@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ```
 Run **main.py** 
 ```
-python3 main.py
+python main.py
 ```
 
 ## Database documentation
