@@ -13,3 +13,4 @@ soupsieve==2.2
 urllib3==1.26.5
 webencodings==0.5.1
 mysql-connector-python==8.0.26
+ray
