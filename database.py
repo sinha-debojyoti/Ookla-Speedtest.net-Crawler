@@ -61,8 +61,9 @@ class Database:
 
         values = list(data.values())
         s = ','.join('%s' for _ in data)
-        insert_statement = f"INSERT INTO {self.table_name} values({s})"
-        self.cursor.execute(insert_statement, values)
+        if not values({s}):                                                        # Changed by
+            insert_statement = f"INSERT INTO {self.table_name} values({s})"        # RoyCoding8
+            self.cursor.execute(insert_statement, values)                          # 3 lines
         self.conn.commit()
 
     @staticmethod

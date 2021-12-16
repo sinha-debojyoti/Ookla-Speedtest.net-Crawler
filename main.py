@@ -6,7 +6,7 @@ if __name__ == '__main__':
     #Starting URL
     ID = 1000000000
 
-    # Number of URLS data to be feched
+    # Number of URLS data to be fetched
     steps = 10
 
     start = time.time()
