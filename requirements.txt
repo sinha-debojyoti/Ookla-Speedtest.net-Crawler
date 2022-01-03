@@ -7,7 +7,7 @@ html5lib==1.1
 idna==3.2
 lxml==4.6.3
 mysql-connector==2.2.9
-requests==2.26.0
+requests==2.27.0
 six==1.15.0
 soupsieve==2.2
 urllib3==1.26.5
