@@ -1,4 +1,4 @@
-beautifulsoup4==4.9.3
+beautifulsoup4==4.11.1
 bs4==0.0.1
 certifi==2021.5.30
 chardet==4.0.0
