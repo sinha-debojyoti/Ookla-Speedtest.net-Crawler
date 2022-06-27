@@ -1,7 +1,7 @@
 beautifulsoup4==4.9.3
 bs4==0.0.1
 certifi==2021.5.30
-chardet==4.0.0
+chardet==5.0.0
 fake-useragent==0.1.11
 html5lib==1.1
 idna==3.2
